@@ -7,6 +7,9 @@
     <groupId>de.siemering.examples</groupId>
     <artifactId>primefaces-spring-jpa-javaconfig</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <properties>
+        <log4j-2.version>2.5</log4j-2.version>
+    </properties>
 
     <packaging>war</packaging>
 
@@ -25,7 +28,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.3</version>
                 <configuration>
-                    <warSourceDirectory>webapp</warSourceDirectory>
+                    <!--<warSourceDirectory>webapp</warSourceDirectory>-->
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
@@ -34,8 +37,46 @@
     </build>
 
 
-
     <dependencies>
+        <!-- Logging-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j-2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j-2.version}</version>
+        </dependency>
+
+        <!--Bridges-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-1.2-api</artifactId>
+            <version>${log4j-2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jcl</artifactId>
+            <version>${log4j-2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j-2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jul</artifactId>
+            <version>${log4j-2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-web</artifactId>
+            <version>${log4j-2.version}</version>
+            <scope>runtime</scope>
+        </dependency>
 
         <!-- http://www.tutorialspoint.com/jsf/jsf_first_application.htm -->
         <dependency>
@@ -55,7 +96,6 @@
             <version>3.1.0</version>
         </dependency>
 
-
         <!-- http://www.primefaces.org/docs/guide/primefaces_user_guide_5_3.pdf -->
         <dependency>
             <groupId>org.primefaces</groupId>
@@ -63,8 +103,37 @@
             <version>5.3</version>
         </dependency>
 
-
-
+        <!--&lt;!&ndash; Spring Context&ndash;&gt;-->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework</groupId>-->
+        <!--<artifactId>spring-core</artifactId>-->
+        <!--<version>4.1.6.RELEASE</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework</groupId>-->
+        <!--<artifactId>spring-aop</artifactId>-->
+        <!--<version>4.1.6.RELEASE</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework</groupId>-->
+        <!--<artifactId>spring-beans</artifactId>-->
+        <!--<version>4.1.6.RELEASE</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework</groupId>-->
+        <!--<artifactId>spring-expression</artifactId>-->
+        <!--<version>4.1.6.RELEASE</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework</groupId>-->
+        <!--<artifactId>spring-context</artifactId>-->
+        <!--<version>4.1.6.RELEASE</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework</groupId>-->
+        <!--<artifactId>spring-web</artifactId>-->
+        <!--<version>4.1.6.RELEASE</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 </project>
