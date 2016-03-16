@@ -7,8 +7,11 @@
     <groupId>de.siemering.examples</groupId>
     <artifactId>primefaces-spring-jpa-javaconfig</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <properties>
         <log4j-2.version>2.5</log4j-2.version>
+        <spring.version>4.1.6.RELEASE</spring.version>
+        <hibernate.version>5.1.0.Final</hibernate.version>
     </properties>
 
     <packaging>war</packaging>
@@ -31,8 +34,74 @@
                 </configuration>
             </plugin>
         </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <finalName>${project.artifactId}</finalName>
     </build>
+
+    <profiles>
+
+        <profile>
+            <id>h2</id>
+            <properties>
+                <javax.persistence.jdbc.driver>org.h2.Driver</javax.persistence.jdbc.driver>
+                <javax.persistence.jdbc.url>jdbc:h2:file:./tmp/testdb</javax.persistence.jdbc.url>
+                <javax.persistence.jdbc.user>sa</javax.persistence.jdbc.user>
+                <javax.persistence.jdbc.password>sa</javax.persistence.jdbc.password>
+                <jpa.dialect>org.hibernate.dialect.H2Dialect</jpa.dialect>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                    <version>1.4.189</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>hsql</id>
+            <properties>
+                <javax.persistence.jdbc.driver>org.hsqldb.jdbcDriver</javax.persistence.jdbc.driver>
+                <javax.persistence.jdbc.url>jdbc:hsqldb:mem:standalone</javax.persistence.jdbc.url>
+                <javax.persistence.jdbc.user>sa</javax.persistence.jdbc.user>
+                <javax.persistence.jdbc.password></javax.persistence.jdbc.password>
+                <jpa.dialect>org.hibernate.dialect.HSQLDialect</jpa.dialect>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.hsqldb</groupId>
+                    <artifactId>hsqldb</artifactId>
+                    <version>2.3.2</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>oraclexe11</id>
+            <properties>
+                <javax.persistence.jdbc.driver>oracle.jdbc.driver.OracleDriver</javax.persistence.jdbc.driver>
+                <javax.persistence.jdbc.url>jdbc:oracle:thin:@//localhost:1521/xe</javax.persistence.jdbc.url>
+                <javax.persistence.jdbc.user>sa</javax.persistence.jdbc.user>
+                <javax.persistence.jdbc.password>sa</javax.persistence.jdbc.password>
+                <jpa.dialect>org.hibernate.dialect.Oracle10gDialect</jpa.dialect>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>com.oracle</groupId>
+                    <artifactId>ojdbc6</artifactId>
+                    <version>11.2.0.3</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+    </profiles>
 
     <dependencies>
         <!-- Logging-->
@@ -100,37 +169,81 @@
             <version>5.3</version>
         </dependency>
 
+        <!--Hibertnate-->
+        <!--http://docs.jboss.org/hibernate/orm/5.1/quickstart/html_single/#_the_hibernate_modules_artifacts-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-java8</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
         <!-- Spring Context-->
         <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-core</artifactId>
-        <version>4.1.6.RELEASE</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-aop</artifactId>
-        <version>4.1.6.RELEASE</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-beans</artifactId>
-        <version>4.1.6.RELEASE</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-expression</artifactId>
-        <version>4.1.6.RELEASE</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-context</artifactId>
-        <version>4.1.6.RELEASE</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-web</artifactId>
-        <version>4.1.6.RELEASE</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!--Test-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.1.9.RELEASE</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
+
+
+
 </project>
