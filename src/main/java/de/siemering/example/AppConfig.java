@@ -25,15 +25,7 @@ public class AppConfig {
 
     @Bean
     public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
-        System.out.println("###transactionManager###");
-
-        JpaTransactionManager transactionManager = new JpaTransactionManager(){
-            @Override
-            public void afterPropertiesSet() {
-                super.afterPropertiesSet();
-                System.out.println("###afterpropertiesset###");
-            }
-        };
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
         transactionManager.afterPropertiesSet();
         return transactionManager;
@@ -41,7 +33,6 @@ public class AppConfig {
 
     @Bean
     public EntityManagerFactory entityManagerFactoryFactory() {
-        System.out.println("###emf###");
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setPersistenceUnitName("pu");
         entityManagerFactoryBean.afterPropertiesSet();
