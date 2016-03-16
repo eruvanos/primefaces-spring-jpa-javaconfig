@@ -23,6 +23,7 @@ public class AppConfig {
         log.trace("AppConfig created");
     }
 
+//    http://forum.spring.io/forum/spring-projects/container/45760-correct-usage-of-factorybeans-in-javaconfig
     @Bean
     public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();

@@ -11,6 +11,8 @@ import javax.persistence.PersistenceContext;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
 
+//http://docs.spring.io/autorepo/docs/spring-framework/3.2.x/spring-framework-reference/html/testing.html
+
 @ContextConfiguration(classes = AppConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class SimpleContextIntegrationTest {
