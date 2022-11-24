@@ -11,7 +11,7 @@
     <properties>
         <log4j-2.version>2.5</log4j-2.version>
         <spring.version>4.1.6.RELEASE</spring.version>
-        <hibernate.version>5.1.0.Final</hibernate.version>
+        <hibernate.version>5.3.20.Final</hibernate.version>
     </properties>
 
     <packaging>war</packaging>
